@@ -12,6 +12,7 @@ Here is what this application demonstrates:
 * Used `Lombok` to eliminate boilerplate code and to improve code readability.
 * Utilized `Jacoco` for generating code Coverage reports, enabling thorough unit test analysis.
 * Leveraged `Mockito` to facilitate efficient unit testing by mocking dependencies.
+* Added `Swagger OpenAPI` for API Documentation.
 
 ### Database Design
 I've created 3 tables:
@@ -95,10 +96,10 @@ Sample data is present at: ```\src\main\resources\data.sql``` file.
 
 
 # Build Steps: 
-./gradlew clean build
+```./gradlew clean build```
 
 # Code Coverage Report
-Once, you build the project with the above build command, Code Coverage report will be generated inside path: retail-store-discounts\build\reports\jacoco\test\html\index.html
+Once, you build the project with the above build command, Code Coverage report will be generated inside path: ```retail-store-discounts\build\reports\jacoco\test\html\index.html```
 
 # Run Application:
 Open RetailStoreDiscountsApplication class & run the main method.
@@ -114,3 +115,7 @@ curl --location 'http://localhost:8085/calculate' \
 
 # Run Unit Test Case: 
 Open DiscountsServiceTest class & execute the Test case.
+
+# Swagger API Docs:
+* Swagger UI Link: http://localhost:8085/swagger-ui/index.html
+* Swagger API Docs Link: http://localhost:8085/v3/api-docs

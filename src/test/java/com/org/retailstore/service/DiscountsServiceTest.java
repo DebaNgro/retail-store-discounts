@@ -12,20 +12,16 @@ import com.org.retailstore.repository.DiscountRulesRepository;
 import com.org.retailstore.repository.ProductRepository;
 import com.org.retailstore.repository.UserRepository;
 import com.org.retailstore.service.impl.DiscountsServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,11 +48,6 @@ public class DiscountsServiceTest {
         discountsService = new DiscountsServiceImpl(userRepository, productRepository, discountRulesRepository);
     }
 
-    @Test
-    public void testGet() {
-        assertEquals("a", "a");
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"1001, 49560.08", "1002, 44635.47", "1005, 47097.775", "1006, 34786.25"})
     public void testCalculateBill(long userId, double billAmt) {
@@ -76,6 +67,11 @@ public class DiscountsServiceTest {
 
         assertNotNull(calculatedBill);
         assertEquals(billAmt, calculatedBill.getBillAmount());
+
+        Mockito.verify(userRepository, Mockito.times(1)).findById(ArgumentMatchers.isA(Long.class));
+        Mockito.verify(productRepository, Mockito.times(1)).findAllById(ArgumentMatchers.anyList());
+        Mockito.verify(discountRulesRepository, Mockito.times(1)).findAll();
+        Mockito.reset(userRepository, productRepository, discountRulesRepository);
     }
 
     private List<DiscountRule> getDiscountRules() {

@@ -10,7 +10,6 @@ import com.org.retailstore.repository.DiscountRulesRepository;
 import com.org.retailstore.repository.ProductRepository;
 import com.org.retailstore.repository.UserRepository;
 import com.org.retailstore.service.DiscountsService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +19,12 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DiscountsServiceImpl implements DiscountsService {
 
-    private UserRepository userRepository;
-    private ProductRepository productRepository;
-    private DiscountRulesRepository discountRulesRepository;
+    private final UserRepository userRepository;
+    private final ProductRepository productRepository;
+    private final DiscountRulesRepository discountRulesRepository;
 
     @Override
     public BillDto calculateBill(OrderDto orderDto) {
